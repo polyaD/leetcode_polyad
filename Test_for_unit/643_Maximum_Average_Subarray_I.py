@@ -5,17 +5,19 @@
 #Author:polya 
 #Email:polyaluthor@gmail.com
 #Last updated:2019.time
-#Version: 0.1
-#Purpose: two sum
+#Version: 1.0 first
+#need do: unit test
+#Purpose: 643_Maximum_Average_Subarray_I
 #Main logic principle:
 #
 #
 #Usage:
-#     example:
+#     example: python 643_Maximum_Average_Subarray_I.py
 ############################################################################
 """
 import os
 import sys
+import datetime
 import argparse
 import pandas as pd
 #
@@ -36,17 +38,50 @@ def get_args():
 #Do somthing for data
 ############################################################################
 class Solution:
-	def __init__(self,arr):
-		self.arr = arr
-		self.target = target
+	def __init__(self,arr,k):
+		self.arr=arr
+		self.k=k
+		#print(type(self.arr))
+		#print(self.k)
+	def findMaxAverage(self):
+		print(type(self.arr))
+	#	"""
+		#print(self.k)
+		#su slice.su to store the sum of k element, slice steps,move one steps
+		su=0
+		largest = float('-inf')
+		for i,num in enumerate(self.arr):
+		#	print(num)
+	#		print(str(i)+"  current")
+			su+=num
+	#		print(str(self.k)+"  slice window")
+	#		print(str(i-self.k)+"  remove")
+			if i>=self.k:
+				su-=self.arr[i-self.k]
+			if i>=self.k-1:
+				largest=max(su,largest)
+				#print(largest)
+		return float(largest)/self.k
+	#	 """
 #
 #
 #Call steps for ends
 ############################################################################
 def call_main_steps():
 	args=get_args()
+	start =datetime.datetime.now()
+	arr=[1,12,-5,-6,50,3,100,20,11]
+	k=4
+	#print(k)
 #self test##################################
+	ar=Solution(arr,k)
+	ar_ends=ar.findMaxAverage()
+	print("The max average of k array: %s"%(ar_ends))
 	print("Hello polya,welcome to the programming world")
+	end=datetime.datetime.now()
+	#print("The programming running time : "+str(end-start))
+	print('Running time: %s Seconds'%(end-start))
+	print("The programming finished time : "+str(end))
 #input from out############################
 #unit test ################################ 
 #
