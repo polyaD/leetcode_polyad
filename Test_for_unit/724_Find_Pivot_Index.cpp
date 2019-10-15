@@ -1,8 +1,8 @@
 /*############################################################################
 #Author:polya 
 #Emalil:polyaluthor@gmail.com
-#model.cpp
-#Last updated:2019.time
+#724_Find_Pivot_Index.cpp
+#Last updated:2019.1o.15
 #history version
 #Version: 0.1
 #Purpose:
@@ -12,6 +12,10 @@
 g++ model.cpp -o model -std=gnu++11
 make model
 ./model
+#eg
+g++ 724_Find_Pivot_Index.cpp -o 724 -std=gnu++11
+make 724
+./724
 ############################################################################*/
 //logic outline:print information
 //include input and out library
@@ -20,21 +24,23 @@ make model
 #include <iostream>
 #include <ctime>
 #include <vector>
+#include<numeric>
 using namespace std;
 //define class for solution
 class Solution {
+	float S;
 	public:
-		double findMaxAverage(vector<int>& nums,int k){
-			int n = nums.size();
-			vector<int> sums = nums;
-			for (int i = 1; i < n; ++i) {
-				sums[i] = sums[i - 1] + nums[i];
+		double pivotIndex(vector<int>& nums){
+			S=accumulate(nums.begin(),nums.end(),0);
+			float leftsum=0;
+			for(unsigned int i = 0; i < nums.size(); ++i){
+				cout<<nums[i]<<" ";
+				if(leftsum==S-leftsum-nums[i]){
+					return i;
+				}
+				leftsum +=nums[i];
 			}
-			double mx = sums[k - 1];
-			for (int i = k; i < n; ++i) {
-					mx = max(mx, (double)sums[i] - sums[i - k]);
-			}
-			return mx / k;
+			return -1;
 			}
 };
 //call main function
@@ -43,12 +49,13 @@ int main(int argc, char* argv[])
 //self test ###################################################################
 	clock_t begin = clock();
 //run programming############################
-	vector<int> arr={1,12,-5,-6,50,3};
-	unsigned int k=4;
-	float fmax_av;
-	Solution fMax;
-	fmax_av=fMax.findMaxAverage(arr,k);
-	cout<<fmax_av<<" The average "<<endl;
+	vector<int> arr;
+//  arr={1,12,-5,-6,50,3};
+	arr={1,2,1,2,1,3};
+	float f_pivot;
+	Solution pivotIn;
+	f_pivot=pivotIn.pivotIndex(arr);
+	cout<<"\nThe outs of programming: "<<f_pivot<<"  The index of pivot at  the array "<<endl;
 //###########################################
 	cout<<"Hello polya,welcome to the programming world" <<endl;
 	clock_t end = clock();
