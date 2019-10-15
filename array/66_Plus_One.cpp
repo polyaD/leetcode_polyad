@@ -2,10 +2,9 @@
 #Author:polya 
 #Emalil:polyaluthor@gmail.com
 #66_Plus_One.cpp
-#Last updated:2019.10.15
+#Last updated:2019.time
 #history version
 #Version: 0.1
-#need do: add log add unit test add parameter
 #Purpose:
 #Main logic principle:
 #Usage:
@@ -21,12 +20,12 @@ make 66
 //include input and out library
 //logic struture:
 //
-#include <algorithm>
 #include <iostream>
-#include <sstream>
 #include <ctime>
-#include <iterator>
 #include <vector>
+#include <iterator>
+#include <sstream>
+#include <algorithm>
 using namespace std;
 //define class for solution
 class Solution {
@@ -46,20 +45,20 @@ class Solution {
 			}
 			return digits;
 			}
-		void displayInfo(vector<int>& nums,bool flag){
-			if(flag==1){
-				for (int i =0;i<nums.size();i++){
-					cout<<nums[i]<<endl;
-				}
-			}else{
-				// Convert vector to string
-				ostringstream vts;
-				vector<int> vec=nums;
-				if (!vec.empty()){
-				copy(vec.begin(), vec.end()-1,ostream_iterator<int>(vts, ", ")); 
-				vts << vec.back();
-				cout<<vts.str()<<endl;
+	void displayInfo(vector<int>& nums,bool flag){
+		if(flag==1){
+			for (int i =0;i<nums.size();i++){
+				cout<<nums[i]<<endl;
 			}
+		}else{
+			// Convert vector to string
+			ostringstream vts;
+			vector<int> vec=nums;
+			if (!vec.empty()){
+			copy(vec.begin(), vec.end()-1,ostream_iterator<int>(vts, ", ")); 
+			vts << vec.back();
+			}
+			cout<<vts.str()<<endl;
 		}
 	}
 };
