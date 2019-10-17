@@ -4,15 +4,15 @@
 ############################################################################
 #Author:polya 
 #Email:polyaluthor@gmail.com
-#Last updated:2019.10.15
+#Last updated:2019.10.16
 #Version: 1.0 first
-#need do: unit test
-#Purpose: 66_Plus_One.py
+#need do: unit test, sort array
+#Purpose: 35_Search_Insert_Position.py
 #Main logic principle:
 #
 #
 #Usage:
-#     example: python 66_Plus_One.py
+#     example: python 35_Search_Insert_Position.py
 ############################################################################
 """
 import os
@@ -38,26 +38,28 @@ def get_args():
 #Do somthing for data
 ############################################################################
 class Solution:
-	def __init__(self,arr):
-		self.digits=arr
+	def __init__(self,arr,target):
+		self.nums=arr
+		self.target=target
 		#print(self.k)
 	def displayShow(self):
 		#for i_iter in self.digits:
 		#	print(i_iter)
-		print(self.digits)
-	def plusOne(self):
-		for i in range(len(self.digits)-1,-1,-1):
-			print(self.digits[i])
-			#if sum <10 each,no need carry
-			if self.digits[i]<9:
-				self.digits[i]+=1
-				return self.digits
-			#max:1+9=10,only 0
-			else:
-				self.digits[i]=0
-		#why?
-		#return 1
-		return [1]+self.digits
+		print(self.nums)
+	def searchInsert(self):
+		n = len(self.nums)
+		if n == 0 or self.target <= self.nums[0]: return 0
+		if self.target > self.nums[n-1]: return n
+		left, right = 0, n-1
+		while left < right:
+					mid = (left+right)//2
+					if self.target == self.nums[mid]: return mid
+					if self.target > self.nums[mid]: left = mid+1
+					else: right = mid-1
+		print(left)
+		print(self.nums[left])
+		if self.target > self.nums[left]: return left+1
+		else: return left
 #
 #
 #Call steps for ends
@@ -67,12 +69,13 @@ def call_main_steps():
 	start =datetime.datetime.now()
 	#arr=[1,12,-5,-6,50,3,100,20,11]
 	#arr=[9,2,1,2,1,9]
-	arr=[9,9,9]
+	arr=[1,1.5,3.5,6]
+	target=4
 #self test##################################
-	ar=Solution(arr)
-	ar_plusOne=ar.displayShow()
-	ar_plusOne=ar.plusOne()
-	print("The element of plusOne  array: %s"%(ar_plusOne))
+	ar=Solution(arr,target)
+	ar_search=ar.displayShow()
+	ar_search=ar.searchInsert()
+	print("The index  of searchInsert  array: %s"%(ar_search))
 	print("Hello polya,welcome to the programming world")
 	end=datetime.datetime.now()
 	#print("The programming running time : "+str(end-start))
