@@ -1,11 +1,10 @@
 /*############################################################################
 #Author:polya 
 #Emalil:polyaluthor@gmail.com
-#323_Number_of_Connected_Components_in_an_Undirected_Graph.cpp
-#Last updated:2019.10.16
+#66_Plus_One.cpp
+#Last updated:2019.time
 #history version
 #Version: 0.1
-#function list add template for avoid datatype
 #Purpose:
 #Main logic principle:
 #Usage:
@@ -13,10 +12,9 @@
 g++ model.cpp -o model -std=gnu++11
 make model
 ./model
-#eg
-g++ 323_Number_of_Connected_Components_in_an_Undirected_Graph.cpp -o 323 -std=gnu++11
-make 323
-./323
+g++ 66_Plus_One.cpp -o 66 -std=gnu++11
+make 66
+./66
 ############################################################################*/
 //logic outline:print information
 //include input and out library
@@ -28,61 +26,64 @@ make 323
 #include <iterator>
 #include <sstream>
 #include <algorithm>
-#include <numeric>
 using namespace std;
 //define class for solution
-template<class T>
 class Solution {
-	private:
-		const vector<T>& nums_;
-		const T& target_;
 	public:
-		Solution(const vector<T>& nums,const T& target):nums_(nums),target_(target) {}
-		int SearInsertPos();
-};
-template<class T>
-int Solution<T>::SearInsertPos(){
-	int i;
-	for(i = 0; i < nums_.size(); i++) {
-		if(nums_[i] >= target_) {
-				return i;
+		vector<int> plusOne(vector<int>& digits){
+			int n=digits.size();
+			for(int i=n-1;i>-0;--i){
+				if(digits[i]<9){
+					digits[i]+=1;
+					return digits;
+				}else{
+					digits[i]=0;
+				}
+			}
+			if(digits.front()==0){
+				digits.insert(digits.begin(),1);
+			}
+			return digits;
+			}
+	void displayInfo(vector<int>& nums,bool flag){
+		if(flag==1){
+			for (int i =0;i<nums.size();i++){
+				cout<<nums[i]<<endl;
+			}
+		}else{
+			// Convert vector to string
+			ostringstream vts;
+			vector<int> vec=nums;
+			if (!vec.empty()){
+			copy(vec.begin(), vec.end()-1,ostream_iterator<int>(vts, ", ")); 
+			vts << vec.back();
+			}
+			cout<<vts.str()<<endl;
 		}
 	}
-	return i;
-}
-void Display(const int& data){
-	cout << data << ' ' ;
-}
-void Display_float(const float& data){
-	cout << data << ' ' ;
-}
+};
 //call main function
 int main(int argc, char* argv[])
 {
 //self test ###################################################################
 	clock_t begin = clock();
-//run programming############################
-	int arr[] = {1,3,5,6};
-	vector<int> nums(arr,arr+4);
-	cout << "The array is:" ;
-	for_each(nums.begin(),nums.end(),Display);
-	Solution<int> sol(nums,5);
-	cout <<endl <<"The target is:" << int(5) << ",The index is:" << sol.SearInsertPos() << endl;
-	Solution<int> sol2(nums,2);
-	cout << "The target is:" << int(2) << ",The index is:" << sol2.SearInsertPos() << endl;
-	Solution<int> sol3(nums,7);
-	cout << "The target is:" << int(7) << ",The index is:" << sol3.SearInsertPos() << endl;
-	Solution<int> sol4(nums,0);
-	cout << "The target is:" << int(0) << ",The index is:" << sol4.SearInsertPos() << endl;
-	float f_arr[] = {1.1,3,5.1,6};
-	vector<float> f_nums(f_arr,f_arr+4);
-	cout << "\nThe array float element is:" ;
-	for_each(f_nums.begin(),f_nums.end(),Display_float);
-	Solution<float> f_sol(f_nums,5);
-	cout <<endl<< "The float target is:" << float(5.5) << ",The index is:" << f_sol.SearInsertPos() << endl;
-cout<<"\n==================================================================="<<endl;
-//###########################################
 	cout<<"Hello polya,welcome to the programming world" <<endl;
+	cout<<"===========================================" <<endl;
+	cout<<"//input element: " <<endl;
+//run programming############################
+	vector<int> arr;
+	vector<int> f_plus;
+//arr={1,12,-5,-6,50,3};
+	arr={1,2,1};
+	//unsigned int k=4;
+	Solution fplusOne;
+	fplusOne.displayInfo(arr,0);
+	f_plus=fplusOne.plusOne(arr);
+	cout<<" The out of ends:  "<<endl;
+	fplusOne.displayInfo(f_plus,0);
+	cout<<" The plus One "<<endl;
+//###########################################
+	cout<<"===========================================" <<endl;
 	clock_t end = clock();
 	double elapsed_secs = static_cast<double>(end - begin) / CLOCKS_PER_SEC;
 	time_t now = time(0);

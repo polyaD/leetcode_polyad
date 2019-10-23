@@ -1,7 +1,7 @@
 /*############################################################################
 #Author:polya 
 #Emalil:polyaluthor@gmail.com
-#26.Remove_duplicates_from_sorted_array.cpp
+#204_Count_Primes.cpp
 #Last updated:2019.10.22
 #history version
 #Version: 0.1
@@ -12,9 +12,9 @@
 g++ model.cpp -o model -std=gnu++11
 make model
 ./model
-g++ 26.Remove_duplicates_from_sorted_array.cpp -o 26 -std=gnu++11
-make 26
-./26
+g++ 204_Count_Primes.cpp -o 204 -std=gnu++11
+make 204
+./204
 ############################################################################*/
 //logic outline:print information
 //include input and out library
@@ -26,20 +26,34 @@ make 26
 #include <iterator>
 #include <sstream>
 #include <algorithm>
+#include "stdio.h"
 using namespace std;
 //define class for solution
 class Solution {
 	public:
-		int removeDuplicates(vector<int>& nums){
-			if(nums.size()==0) return 0;
-			int i=0;
-			for (int j=1;j<nums.size();j++){
-				if (nums[j] != nums[i]) {
-					i++;
-					nums[i]=nums[j];
+		int countPrimes(int num){
+			if(num<=2) return 0;
+			vector<bool> prime(num,true);
+			prime[0]=false,prime[1]=false;
+			for(int i=0;i<=sqrt(num);++i){
+				if(prime[i]){
+					for(int j=i*i;j<num;j+=i){
+						prime[j]=false;
+					}
 				}
 			}
-			return i+1;
+			int sizes=prime.size();
+			int nu=0;
+			for(int k=0;k<sizes;k++){
+				//printf("%d ",nu);
+				if(prime[k]==1){
+					printf("%d ",nu);
+				//	cout<<nu<<endl;
+				}
+				nu=nu+1;
+				//cout<<prime[k]<<endl;
+			}
+			return count(prime.begin(), prime.end(), true);
 			}
 	void displayInfo(vector<int>& nums,bool flag){
 		if(flag==1){
@@ -68,21 +82,22 @@ int main(int argc, char* argv[])
 	clock_t begin = clock();
 	cout<<"Hello polya,welcome to the programming world" <<endl;
 	cout<<"===========================================" <<endl;
-	cout<<"//input element: " <<endl;
+	cout<<"//out element: " <<endl;
 //run programming############################
-	vector<int> arr;
+	int fPrime;
 //	vector<int> f_redu;
-	int f_redu;
+	int num;
 //arr={1,12,-5,-6,50,3};
 	//arr={1,2,1,0,0,3,3,4};
 	//arr={1,1,2};
-	arr={0,0,1,1,2,3,3,4};
+	//arr={0,0,1,1,2,3,3,4};
+	num=80;
 	//unsigned int k=4;
-	Solution fRedu;
+	Solution f_prime;
 //	fRedu.displayInfo(arr);
-	f_redu=fRedu.removeDuplicates(arr);
-	cout<<" The out of ends:  "<<endl;
-	fRedu.displayInfo(f_redu);
+	fPrime=f_prime.countPrimes(num);
+	cout<<" The out of ends:  "<<fPrime<<endl;
+	f_prime.displayInfo(fPrime);
 	cout<<" The plus One "<<endl;
 //###########################################
 	cout<<"===========================================" <<endl;
